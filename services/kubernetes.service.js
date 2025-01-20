@@ -442,6 +442,7 @@ module.exports = {
                 const kind = event.kind.toLocaleLowerCase()
 
                 delete event.metadata.managedFields
+                this.logger.info(`Event received: ${event.phase} ${kind} in cluster ${cluster}`);
                 if (event.phase == 'deleted') {
                     this.db.remove({ _id: event._id }, {}, (err, numRemoved) => {
                         if (err) {
