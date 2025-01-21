@@ -438,12 +438,14 @@ module.exports = {
                     _id: resource.metadata.uid,
                     cluster: config.name,
                     phase: phase.toLocaleLowerCase()
-                }
+                };
 
-                const kind = event.kind.toLocaleLowerCase()
+                const kind = event.kind.toLocaleLowerCase();
+                const namespace = event.metadata.namespace;
+                const name = event.metadata.name;
 
                 delete event.metadata.managedFields
-                this.logger.info(`Event received: ${event.phase} ${kind} in cluster ${cluster}`);
+                this.logger.info(`Event received: ${event.phase} ${kind} ${namespace} ${name} in cluster ${cluster}`);
                 if (event.phase == 'deleted') {
                     this.db.remove({ _id: event._id }, {}, (err, numRemoved) => {
                         if (err) {
