@@ -7,6 +7,7 @@ const request = require('request');
 const fs = require('fs').promises;
 
 const Datastore = require('../lib/nedb/index');
+const { config } = require("process");
 
 /**
  * attachments of addons service
@@ -598,6 +599,7 @@ module.exports = {
             const configFiles = await fs.readdir(`${this.settings.config.configFolder}`);
 
             for (let configFile of configFiles) {
+                if(configFile == '.gitkeep') continue;
                 const clusterName = configFile.replace('.kubeconfig', '');
                 const kubeconfig = await fs.readFile(`${this.settings.config.configFolder}/${configFile}`);
                 this.logger.info(`Loading kubeconfig ${clusterName}`);
