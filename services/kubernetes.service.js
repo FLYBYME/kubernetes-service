@@ -899,6 +899,8 @@ function generateAPI(name) {
                     properties.push(options)
                 }
 
+                this.logger.info(`Making call to ${rest} Key: ${key}`);
+
                 return config.api[name][`${key}`](...properties)
                     .then((res) => {
                         return res.body
