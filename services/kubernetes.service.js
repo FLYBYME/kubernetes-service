@@ -600,6 +600,7 @@ module.exports = {
             for (let configFile of configFiles) {
                 const clusterName = configFile.replace('.kubeconfig', '');
                 const kubeconfig = await fs.readFile(`${this.settings.config.configFolder}/${configFile}`);
+                this.logger.info(`Loading kubeconfig ${clusterName}`);
                 await this.loadKubeConfig(clusterName, kubeconfig);
             }
         },
