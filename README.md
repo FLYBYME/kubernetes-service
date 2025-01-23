@@ -15,6 +15,21 @@ This service provides integration with Kubernetes clusters using the Moleculer f
 
 The service reads Kubernetes configurations from the `config` folder. Each configuration file should be named as `<cluster-name>.kubeconfig`.
 
+## Installation
+
+To run the services, install Docker and run the following command:
+```bash
+docker run -d --name kubernetes --restart always -v /path/to/data:/app/db -v /path/to/config:/app/config ghcr.io/flybyme/kubernetes-service:main
+```
+For Nats as the transporter
+
+```bash
+docker run -d --name kubernetes --restart always -e TRANSPORTER=nats://10.1.10.1:4222 -v /path/to/data:/app/db -v /path/to/config:/app/config ghcr.io/flybyme/kubernetes-service:main
+```
+
+Replace `/path/to/data` with the path to your data directory.
+Replace `/path/to/config` with the path to your config directory.
+
 ## Actions
 
 ### loadKubeConfig
